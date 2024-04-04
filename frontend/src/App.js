@@ -4,7 +4,7 @@ import { createBrowserRouter, Navigate, RouterProvider } from "react-router-dom"
 import Dashboard from "./pages/Dashboard";
 import { Layout } from "./components/Layout";
 import  Login  from "./pages/Login";
-import { Tasks } from "./pages/Tasks";
+import Tasks from "./pages/Tasks";
 import { Toaster } from "sonner";
 
 
