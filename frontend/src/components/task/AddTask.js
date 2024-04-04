@@ -4,7 +4,7 @@ import { Dialog } from "@headlessui/react";
 import Textbox from "../Textbox";
 import { useForm } from "react-hook-form";
 // import UserList from "./UserList";
-// import SelectList from "../SelectList";
+import SelectList from "../SelectList";
 import { BiImages } from "react-icons/bi";
 import Button from "../Button";
 
@@ -83,12 +83,12 @@ const AddTask = ({ open, setOpen }) => {
                     </div>
 
                     <div className='flex gap-4'>
-                        {/* <SelectList
+                        <SelectList
                                 label='Priority Level'
                                 lists={PRIORIRY}
                                 selected={priority}
                                 setSelected={setPriority}
-                            /> */}
+                            />
 
                         <div className='w-full flex items-center justify-center mt-4'>
                             <label
