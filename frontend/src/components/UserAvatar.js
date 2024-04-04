@@ -4,7 +4,7 @@ import { FaUser, FaUserLock } from "react-icons/fa";
 import { IoLogOutOutline } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-// import { getInitials } from "../utils";
+import { getInitials } from "../utils";
 
 const UserAvatar = () => {
     const [open, setOpen] = useState(false);
@@ -24,7 +24,7 @@ const UserAvatar = () => {
                     <div>
                         <Menu.Button className='w-10 h-10 2xl:w-12 2xl:h-12 items-center justify-center rounded-full bg-blue-600'>
                             <span className='text-white font-semibold'>
-                                {/* {getInitials(user?.name)} */}
+                                {getInitials(user?.name)}
                             </span>
                         </Menu.Button>
                     </div>

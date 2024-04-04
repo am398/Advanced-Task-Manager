@@ -8,12 +8,12 @@ import {
 } from "react-icons/md";
 import { useSelector } from "react-redux";
 import { BGS, PRIOTITYSTYELS, TASK_TYPE, formatDate } from "../utils";
-// import TaskDialog from "./task/TaskDialog";
+import TaskDialog from "./task/TaskDialog";
 import { BiMessageAltDetail } from "react-icons/bi";
 import { FaList } from "react-icons/fa";
 import UserInfo from "./UserInfo";
 import { IoMdAdd } from "react-icons/io";
-// import AddSubTask from "./task/AddSubTask";
+import AddSubTask from "./task/AddSubTask";
 
 const ICONS = {
     high: <MdKeyboardDoubleArrowUp />,
@@ -39,7 +39,7 @@ const TaskCard = ({ task }) => {
                         <span className='uppercase'>{task?.priority} Priority</span>
                     </div>
 
-                    {/* {user?.isAdmin && <TaskDialog task={task} />} */}
+                    {user?.isAdmin && <TaskDialog task={task} />}
                 </div>
 
                 <>
@@ -122,7 +122,7 @@ const TaskCard = ({ task }) => {
                 </div>
             </div>
 
-            {/* <AddSubTask open={open} setOpen={setOpen} id={task._id} /> */}
+            <AddSubTask open={open} setOpen={setOpen} id={task._id} />
         </>
     );
 };

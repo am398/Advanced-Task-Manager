@@ -12,7 +12,7 @@ import moment from "moment";
 import { summary } from "../assets/data";
 import clsx from "clsx";
 import { BGS, PRIOTITYSTYELS, TASK_TYPE, getInitials } from "../utils";
-// import UserInfo from "../components/UserInfo";
+import UserInfo from "../components/UserInfo";
 
 const TaskTable = ({ tasks }) => {
     const ICONS = {
@@ -63,7 +63,7 @@ const TaskTable = ({ tasks }) => {
                                 BGS[index % BGS.length]
                             )}
                         >
-                            {/* <UserInfo user={m} /> */}
+                            <UserInfo user={m} />
                         </div>
                     ))}
                 </div>
@@ -152,12 +152,6 @@ const Dashboard = () => {
                     <Card key={index} icon={icon} bg={bg} label={label} count={total} />
                 ))}
             </div>
-
-            {/* <div className='w-full bg-white my-16 p-4 rounded shadow-sm'>
-                <h4 className='text-xl text-gray-600 font-semibold'>
-                    Chart by Priority
-                </h4>
-            </div> */}
 
             <div className='w-full flex flex-col md:flex-row gap-4 2xl:gap-10 py-8'>
                 <TaskTable tasks={summary.last10Task} />

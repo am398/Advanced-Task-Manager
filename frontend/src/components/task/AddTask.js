@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-// import ModalWrapper from "../ModalWrapper";
+import ModalWrapper from "../ModalWrapper";
 import { Dialog } from "@headlessui/react";
 import Textbox from "../Textbox";
 import { useForm } from "react-hook-form";
@@ -37,7 +37,7 @@ const AddTask = ({ open, setOpen }) => {
 
     return (
         <>
-            {/* <ModalWrapper open={open} setOpen={setOpen}> */}
+            <ModalWrapper open={open} setOpen={setOpen}>
             <form onSubmit={handleSubmit(submitHandler)}>
                 <Dialog.Title
                     as='h2'
@@ -131,7 +131,7 @@ const AddTask = ({ open, setOpen }) => {
                     </div>
                 </div>
             </form>
-            {/* </ModalWrapper> */}
+            </ModalWrapper>
         </>
     );
 };
