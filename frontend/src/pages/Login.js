@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Textbox from "../components/Textbox";
 import Button from "../components/Button";
 import { useSelector } from "react-redux";
+import { SignInButton } from "@clerk/clerk-react";
 
 const Login = () => {
     // const { user } = useSelector((state) => state.auth);
@@ -33,7 +34,7 @@ const Login = () => {
                             Manage all your task in one place!
                         </span>
                         <p className='flex flex-col gap-0 md:gap-4 text-4xl md:text-6xl 2xl:text-7xl font-black text-center text-blue-700'>
-                            <span>Cloud-Based</span>
+                            <span>My</span>
                             <span>Task Manager</span>
                         </p>
 
@@ -86,11 +87,11 @@ const Login = () => {
                                 Forget Password?
                             </span>
 
-                            <Button
-                                type='submit'
-                                label='Submit'
-                                className='w-full h-10 bg-blue-700 text-white rounded-full'
-                            />
+
+
+                            <div className='w-full align-middle h-10 bg-blue-700 text-white rounded-full'>
+                                <SignInButton />
+                            </div>
                         </div>
                     </form>
                 </div>
