@@ -26,7 +26,6 @@ const TaskTable = ({ tasks }) => {
             <tr className='text-black text-left'>
                 <th className='py-2'>Task Title</th>
                 <th className='py-2'>Priority</th>
-                <th className='py-2'>Team</th>
                 <th className='py-2 hidden md:block'>Created At</th>
             </tr>
         </thead>
@@ -53,21 +52,6 @@ const TaskTable = ({ tasks }) => {
                 </div>
             </td>
 
-            <td className='py-2'>
-                <div className='flex'>
-                    {task.team.map((m, index) => (
-                        <div
-                            key={index}
-                            className={clsx(
-                                "w-7 h-7 rounded-full text-white flex items-center justify-center text-sm -mr-1",
-                                BGS[index % BGS.length]
-                            )}
-                        >
-                            <UserInfo user={m} />
-                        </div>
-                    ))}
-                </div>
-            </td>
             <td className='py-2 hidden md:block'>
                 <span className='text-base text-gray-600'>
                     {moment(task?.date).fromNow()}
@@ -77,7 +61,7 @@ const TaskTable = ({ tasks }) => {
     );
     return (
         <>
-            <div className='w-full md:w-2/3 bg-white px-2 md:px-4 pt-4 pb-4 shadow-md rounded'>
+            <div className='w-full bg-white px-2 md:px-4 pt-4 pb-4 shadow-md rounded'>
                 <table className='w-full'>
                     <TableHeader />
                     <tbody>
@@ -104,7 +88,7 @@ const Dashboard = () => {
         },
         {
             _id: "2",
-            label: "COMPLTED TASK",
+            label: "COMPLETED TASK",
             total: totals["completed"] || 0,
             icon: <MdAdminPanelSettings />,
             bg: "bg-[#0f766e]",
@@ -131,7 +115,6 @@ const Dashboard = () => {
                 <div className='h-full flex flex-1 flex-col justify-between'>
                     <p className='text-base text-gray-600'>{label}</p>
                     <span className='text-2xl font-semibold'>{count}</span>
-                    <span className='text-sm text-gray-400'>{"110 last month"}</span>
                 </div>
 
                 <div

@@ -2,13 +2,12 @@ import React, { Fragment, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AiTwotoneFolderOpen } from "react-icons/ai";
 import { BsThreeDots } from "react-icons/bs";
-import { HiDuplicate } from "react-icons/hi";
 import { MdAdd, MdOutlineEdit } from "react-icons/md";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { Menu, Transition } from "@headlessui/react";
 import AddTask from "./AddTask";
 import AddSubTask from "./AddSubTask";
-import ConfirmatioDialog from "../Dialogs";
+import ConfirmationDialog from "../ConfirmationDialogs";
 
 const TaskDialog = ({ task }) => {
     const [open, setOpen] = useState(false);
@@ -16,9 +15,7 @@ const TaskDialog = ({ task }) => {
     const [openDialog, setOpenDialog] = useState(false);
 
     const navigate = useNavigate();
-
-    const duplicateHandler = () => { };
-    const deleteClicks = () => { };
+    const deleteClicks = () => { setOpenDialog(true) };
     const deleteHandler = () => { };
 
     const items = [
@@ -36,12 +33,7 @@ const TaskDialog = ({ task }) => {
             label: "Add Sub-Task",
             icon: <MdAdd className='mr-2 h-5 w-5' aria-hidden='true' />,
             onClick: () => setOpen(true),
-        },
-        {
-            label: "Duplicate",
-            icon: <HiDuplicate className='mr-2 h-5 w-5' aria-hidden='true' />,
-            // onClick: () => duplicateHanlder(),
-        },
+        }
     ];
 
     return (
@@ -110,7 +102,7 @@ const TaskDialog = ({ task }) => {
 
             <AddSubTask open={open} setOpen={setOpen} />
 
-            <ConfirmatioDialog
+            <ConfirmationDialog
                 open={openDialog}
                 setOpen={setOpenDialog}
                 onClick={deleteHandler}

@@ -39,7 +39,7 @@ const TaskCard = ({ task }) => {
                         <span className='uppercase'>{task?.priority} Priority</span>
                     </div>
 
-                    {user?.isAdmin && <TaskDialog task={task} />}
+                    <TaskDialog task={task} />
                 </div>
 
                 <>
@@ -71,24 +71,21 @@ const TaskCard = ({ task }) => {
                         </div>
                     </div>
 
-                    <div className='flex flex-row-reverse'>
-                        {task?.team?.map((m, index) => (
-                            <div
-                                key={index}
-                                className={clsx(
-                                    "w-7 h-7 rounded-full text-white flex items-center justify-center text-sm -mr-1",
-                                    BGS[index % BGS?.length]
-                                )}
-                            >
-                                <UserInfo user={m} />
-                            </div>
-                        ))}
+                    <div flex flex-col items-center gap-2>
+                        <div
+                            className={clsx("w-4 h-4 rounded-full", TASK_TYPE[task.stage])}
+                        />
+                        <h4 className='uppercase text-sm text-black'>{task.stage}</h4>
                     </div>
+
                 </div>
 
                 {/* sub tasks */}
                 {task?.subTasks?.length > 0 ? (
                     <div className='py-4 border-t border-gray-200'>
+                        <h5 className='text-base line-clamp-1 text-black underline'>
+                            Sub Task :
+                        </h5>
                         <h5 className='text-base line-clamp-1 text-black'>
                             {task?.subTasks[0].title}
                         </h5>
@@ -113,7 +110,6 @@ const TaskCard = ({ task }) => {
                 <div className='w-full pb-2'>
                     <button
                         onClick={() => setOpen(true)}
-                        disabled={user.isAdmin ? false : true}
                         className='w-full flex gap-4 items-center text-sm text-gray-500 font-semibold disabled:cursor-not-allowed disabled::text-gray-300'
                     >
                         <IoMdAdd className='text-lg' />
