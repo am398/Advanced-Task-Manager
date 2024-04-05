@@ -23,7 +23,7 @@ export const createTask = async (req, res) => {
 
 export const dashboardStatistics = async (req, res) => {
     try {
-        const { user_id } = req.body;
+        const { user_id } = req.query;
         const allTasks = await Task.find({
             user_id: user_id
         }).sort({ _id: -1 });
@@ -48,13 +48,12 @@ export const dashboardStatistics = async (req, res) => {
 
 export const getTasks = async (req, res) => {
     try {
-        const { user_id } = req.body;
-        const { stage } = req.query;
-        console.log(stage);
+        const { user_id } = req.query;
         console.log(user_id)
-        let queryResult = Task.find({stage: stage, user_id: user_id})
+        let queryResult = Task.find({user_id: user_id})
             .sort({ _id: -1 });
         const tasks = await queryResult;
+        console.log(tasks)
         res.status(200).json({
             status: true,
             tasks,
@@ -137,30 +136,13 @@ export const updateTask = async (req, res) => {
 };
 
 
-export const deleteRestoreTask = async (req, res) => {
+export const deleteTask = async (req, res) => {
     try {
         const { id } = req.params;
-        const { actionType } = req.query;
-
-        if (actionType === "delete") {
-            await Task.findByIdAndDelete(id);
-        } else if (actionType === "deleteAll") {
-            await Task.deleteMany({ isTrashed: true });
-        } else if (actionType === "restore") {
-            const resp = await Task.findById(id);
-
-            resp.isTrashed = false;
-            resp.save();
-        } else if (actionType === "restoreAll") {
-            await Task.updateMany(
-                { isTrashed: true },
-                { $set: { isTrashed: false } }
-            );
-        }
-
+        await Task.findByIdAndDelete(id);
         res.status(200).json({
             status: true,
-            message: `Operation performed successfully.`,
+            message: `Deletion performed successfully.`,
         });
     } catch (error) {
         console.log(error);

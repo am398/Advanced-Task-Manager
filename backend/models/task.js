@@ -9,7 +9,7 @@ const taskSchema = new Schema(
       default: "normal",
       enum: ["high", "medium", "normal", "low"],
     },
-    user_id: { type: Number, required: true },
+    user_id: { type: String, required: true },
     stage: {
       type: String,
       default: "todo",

@@ -4,7 +4,7 @@ import express from "express";
 import morgan from "morgan";
 import mongoose from "mongoose";
 import routes from "./routes/index.js";
-
+import cors from "cors";
 
 
 dotenv.config();
@@ -31,7 +31,7 @@ app.get("/", (req, res) => {
 );
 
 
-
+app.use(cors())
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());

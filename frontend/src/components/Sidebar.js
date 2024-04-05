@@ -6,7 +6,7 @@ import {
     MdSettings,
     MdTaskAlt,
 } from "react-icons/md";
-import { FaTasks} from "react-icons/fa";
+import { FaTasks } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import { setOpenSidebar } from "../redux/slices/authSlice";
@@ -46,10 +46,9 @@ const Sidebar = () => {
 
     const dispatch = useDispatch();
     const location = useLocation();
-
     const path = location.pathname.split("/")[1];
 
-    const sidebarLinks = user?.isAdmin ? linkData : linkData.slice(0, 5);
+    const sidebarLinks = user ? linkData : linkData.slice(0, 5);
 
     const closeSidebar = () => {
         dispatch(setOpenSidebar(false));
@@ -62,7 +61,9 @@ const Sidebar = () => {
                 onClick={closeSidebar}
                 className={clsx(
                     "w-full lg:w-3/4 flex gap-2 px-3 py-2 rounded-full items-center text-gray-800 text-base hover:bg-[#2564ed2d]",
-                    path === el.link.split("/")[0] ? "bg-orange-700 text-neutral-100" : ""
+                    path === el.link.split("/")[0] ?
+                        "bg-orange-700 text-neutral-100"
+                        : ""
                 )}
             >
                 {el.icon}

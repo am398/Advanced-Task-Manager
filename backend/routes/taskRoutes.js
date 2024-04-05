@@ -3,7 +3,7 @@ import {
   createSubTask,
   createTask,
   dashboardStatistics,
-  deleteRestoreTask,
+  deleteTask,
   getTask,
   getTasks,
   updateTask,
@@ -17,11 +17,11 @@ router.get("/", getTasks);
 router.get("/:id", getTask);
 
 router.patch("/create-subtask/:id", createSubTask);
-router.put("/update/:id", updateTask);
+router.patch("/update/:id", updateTask);
 
 router.delete(
-  "/delete-restore/:id?",
-  deleteRestoreTask
+  "/delete/:id",
+  deleteTask
 );
 
 export default router;
