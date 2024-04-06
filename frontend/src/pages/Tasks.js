@@ -9,9 +9,10 @@ import { IoMdAdd } from "react-icons/io";
 import Tabs from "../components/Tabs";
 import TaskTitle from "../components/TaskTitle";
 import BoardView from "../components/BoardView";
-import { tasks } from "../assets/data";
+// import { tasks } from "../assets/data";
 import Table from "../components/task/Table";
 import AddTask from "../components/task/AddTask";
+import { useSelector } from "react-redux";
 
 const TABS = [
   { title: "Board View", icon: <MdGridView /> },
@@ -27,11 +28,27 @@ const TASK_TYPE = {
 const Tasks = () => {
   const params = useParams();
 
+  let tasks = useSelector((state) => state.task.tasks);
+
+  const todoTasks = useSelector((state) => state.task.todoTasks);
+  const completedTasks = useSelector((state) => state.task.completedTasks);
+  const inProgressTasks = useSelector((state) => state.task.inProgressTasks);
+
   const [selected, setSelected] = useState(0);
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const status = params?.status || "";
+
+  if (status) {
+    if (status === "todo") {
+      tasks = todoTasks;
+    } else if (status === "completed") {
+      tasks = completedTasks;
+    } else if (status === "in progress") {
+      tasks = inProgressTasks;
+    }
+  }
 
   return loading ? (
     <div className='py-10'>

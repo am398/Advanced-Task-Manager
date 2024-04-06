@@ -2,7 +2,7 @@ import Task from "../models/task.js";
 
 export const createTask = async (req, res) => {
     try {
-        // const { userId } = req.user;
+        console.log(req.body)
         const { title, user_id, stage, date, priority, assets } = req.body;
 
         const task = await Task.create({
@@ -28,7 +28,6 @@ export const dashboardStatistics = async (req, res) => {
             user_id: user_id
         }).sort({ _id: -1 });
 
-        // calculate total tasks
         const totalTasks = allTasks?.length;
 
         const summary = {
@@ -49,11 +48,9 @@ export const dashboardStatistics = async (req, res) => {
 export const getTasks = async (req, res) => {
     try {
         const { user_id } = req.query;
-        console.log(user_id)
         let queryResult = Task.find({user_id: user_id})
             .sort({ _id: -1 });
         const tasks = await queryResult;
-        console.log(tasks)
         res.status(200).json({
             status: true,
             tasks,

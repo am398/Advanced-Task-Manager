@@ -38,7 +38,6 @@ const Table = ({ tasks }) => {
                 <th className='py-2'>Priority</th>
                 <th className='py-2 line-clamp-1'>Created At</th>
                 <th className='py-2'>Assets</th>
-                <th className='py-2'>Team</th>
             </tr>
         </thead>
     );
@@ -75,10 +74,6 @@ const Table = ({ tasks }) => {
 
             <td className='py-2'>
                 <div className='flex items-center gap-3'>
-                    <div className='flex gap-1 items-center text-sm text-gray-600'>
-                        <BiMessageAltDetail />
-                        <span>{task?.activities?.length}</span>
-                    </div>
                     <div className='flex gap-1 items-center text-sm text-gray-600 dark:text-gray-400'>
                         <MdAttachFile />
                         <span>{task?.assets?.length}</span>
@@ -87,22 +82,6 @@ const Table = ({ tasks }) => {
                         <FaList />
                         <span>0/{task?.subTasks?.length}</span>
                     </div>
-                </div>
-            </td>
-
-            <td className='py-2'>
-                <div className='flex'>
-                    {task?.team?.map((m, index) => (
-                        <div
-                            key={m._id}
-                            className={clsx(
-                                "w-7 h-7 rounded-full text-white flex items-center justify-center text-sm -mr-1",
-                                BGS[index % BGS?.length]
-                            )}
-                        >
-                            <UserInfo user={m} />
-                        </div>
-                    ))}
                 </div>
             </td>
 

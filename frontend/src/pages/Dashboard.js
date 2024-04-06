@@ -13,6 +13,8 @@ import { summary } from "../assets/data";
 import clsx from "clsx";
 import { BGS, PRIOTITYSTYELS, TASK_TYPE, getInitials } from "../utils";
 
+import { useSelector } from 'react-redux';
+
 const TaskTable = ({ tasks }) => {
     const ICONS = {
         high: <MdKeyboardDoubleArrowUp />,
@@ -75,34 +77,40 @@ const TaskTable = ({ tasks }) => {
 };
 
 const Dashboard = () => {
-    const totals = summary.tasks;
+
+    const totalTasks = useSelector((state) => state.task.tasks);
+    const todoTasks = useSelector((state) => state.task.todoTasks);
+    const completedTasks = useSelector((state) => state.task.completedTasks);
+    const inProgressTasks = useSelector((state) => state.task.inProgressTasks);
+    const user = useSelector((state) => state.auth.user);
+    const fullName = user ? user.fullName : '';
 
     const stats = [
         {
             _id: "1",
             label: "TOTAL TASK",
-            total: summary?.totalTasks || 0,
+            total: totalTasks?.length || 0,
             icon: <FaNewspaper />,
             bg: "bg-[#1d4ed8]",
         },
         {
             _id: "2",
             label: "COMPLETED TASK",
-            total: totals["completed"] || 0,
+            total: completedTasks.length || 0,
             icon: <MdAdminPanelSettings />,
             bg: "bg-[#0f766e]",
         },
         {
             _id: "3",
             label: "TASK IN PROGRESS ",
-            total: totals["in progress"] || 0,
+            total: inProgressTasks.length || 0,
             icon: <LuClipboardEdit />,
             bg: "bg-[#f59e0b]",
         },
         {
             _id: "4",
             label: "TODOS",
-            total: totals["todo"],
+            total: todoTasks.length || 0,
             icon: <FaArrowsToDot />,
             bg: "bg-[#be185d]" || 0,
         },
@@ -128,7 +136,10 @@ const Dashboard = () => {
         );
     };
     return (
-        <div classNamee='h-full py-4'>
+        <div className='h-full py-4'>
+            <h1 className="text-3xl md:text-5xl lg:text-6xl xl:text-7xl text-left text-purple-700 font-bold mt-8 pl-3 pb-8">
+                Hey, {user && fullName}!
+            </h1>
             <div className='grid grid-cols-1 md:grid-cols-4 gap-5'>
                 {stats.map(({ icon, bg, label, total }, index) => (
                     <Card key={index} icon={icon} bg={bg} label={label} count={total} />
@@ -136,7 +147,7 @@ const Dashboard = () => {
             </div>
 
             <div className='w-full flex flex-col md:flex-row gap-4 2xl:gap-10 py-8'>
-                <TaskTable tasks={summary.last10Task} />
+                <TaskTable tasks={totalTasks} />
             </div>
         </div>
     );

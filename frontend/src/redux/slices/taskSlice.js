@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { useSelector } from 'react-redux';
-
+import { useDispatch } from 'react-redux';
 
 
 const initialState = {
@@ -18,17 +18,17 @@ export const taskSlice = createSlice({
 	reducers: {
 		tasksLoaded: (state, action) => {
 			state.tasks = action.payload;
-			state.todoTasks = action.payload.filter(task => task.status === 'todo');
-			state.completedTasks = action.payload.filter(task => task.status === 'completed');
-			state.inProgressTasks = action.payload.filter(task => task.status === 'inProgress');
+			state.todoTasks = action.payload.filter(task => task.stage === 'todo');
+			state.completedTasks = action.payload.filter(task => task.stage === 'completed');
+			state.inProgressTasks = action.payload.filter(task => task.stage === 'in progress');
 		},
 		taskAdded: (state, action) => {
 			state.tasks.push(action.payload);
-			if (action.payload.status === 'todo') {
+			if (action.payload.stage === 'todo') {
 				state.todoTasks.push(action.payload);
-			} else if (action.payload.status === 'completed') {
+			} else if (action.payload.stage === 'completed') {
 				state.completedTasks.push(action.payload);
-			} else if (action.payload.status === 'inProgress') {
+			} else if (action.payload.stage === 'in progress') {
 				state.inProgressTasks.push(action.payload);
 			}
 		},
@@ -44,9 +44,9 @@ export const taskSlice = createSlice({
 			if (index !== -1) {
 				state.tasks[index] = updatedTask;
 			}
-			state.todoTasks = state.tasks.filter(task => task.status === 'todo');
-			state.completedTasks = state.tasks.filter(task => task.status === 'completed');
-			state.inProgressTasks = state.tasks.filter(task => task.status === 'inProgress');
+			state.todoTasks = state.tasks.filter(task => task.stage === 'todo');
+			state.completedTasks = state.tasks.filter(task => task.stage === 'completed');
+			state.inProgressTasks = state.tasks.filter(task => task.stage === 'in progress');
 		},
 	},
 });
@@ -62,23 +62,24 @@ export const getAllTasks = (id) => async (dispatch) => {
 				user_id: id
 			}
 		});
-		console.log(response.data);
-		dispatch(tasksLoaded(response.data));
+		dispatch(tasksLoaded(response.data.tasks));
 	} catch (error) {
 		console.error('Error fetching tasks:', error);
 		toast.error('Failed to fetch tasks');
 	}
 };
 
-export const addTask = (taskData) => async (dispatch) => {
-	try {
-		const response = await axios.post('http://localhost:4000/task/add', taskData);
-		dispatch(taskAdded(response.data));
-		toast.success('Task added successfully');
-	} catch (error) {
-		console.error('Error adding task:', error);
-		toast.error('Failed to add task');
-	}
+export async function addTask(taskData,dispatch){
+    try {
+        const response = await axios.post('http://localhost:5000/api/task/create', taskData);
+        dispatch(taskAdded(response.data.task));
+        toast.success('Task added successfully');
+        return true; // Task added successfully
+    } catch (error) {
+        console.error('Error adding task:', error);
+        toast.error('Failed to add task');
+        return false; // Failed to add task
+    }
 };
 
 export const deleteTask = (taskId) => async (dispatch) => {

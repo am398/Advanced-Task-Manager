@@ -35,8 +35,6 @@ export const summary = {
                     email: "alex.johnson@example.com",
                 },
             ],
-            isTrashed: false,
-            activities: [],
             subTasks: [
                 {
                     title: "Task manager youtube tutorial",
@@ -56,46 +54,6 @@ export const summary = {
             priority: "medium",
             stage: "in progress",
             assets: [],
-            team: [
-                {
-                    _id: "65c317360fd860f958baa08e",
-                    name: "Alex Johnson",
-                    title: "UX Designer",
-                    role: "Designer",
-                    email: "alex.johnson@example.com",
-                },
-                {
-                    _id: "65c3176a0fd860f958baa099",
-                    name: "Emily Wilson",
-                    title: "Data Analyst",
-                    role: "Analyst",
-                    email: "emily.wilson@example.com",
-                },
-            ],
-            isTrashed: false,
-            activities: [
-                {
-                    type: "started",
-                    activity: "Project started",
-                    date: "2024-02-09T09:16:56.623Z",
-                    by: "65c202d4aa62f32ffd1303cc",
-                    _id: "65c5f18bb5204a81bde866d1",
-                },
-                {
-                    type: "commented",
-                    activity: "i like coding!!",
-                    date: "2024-02-09T09:16:56.623Z",
-                    by: "65c202d4aa62f32ffd1303cc",
-                    _id: "65c5f19eb5204a81bde866dd",
-                },
-                {
-                    type: "bug",
-                    activity: "bug found",
-                    date: "2024-02-09T09:16:56.623Z",
-                    by: "65c202d4aa62f32ffd1303cc",
-                    _id: "65c5f1abb5md:w-2/3204a81bde866eb",
-                },
-            ],
             subTasks: [
                 {
                     title: "Blog App Admin Dashboard",
@@ -200,32 +158,6 @@ export const summary = {
             assets: [
                 "https://firebasestorage.googleapis.com/v0/b/taskmanager-557d7.appspot.com/o/1707412043078report.jpg?alt=media&token=41d02b42-c25c-4fbb-90a9-340a45f4bbe1",
                 "https://firebasestorage.googleapis.com/v0/b/taskmanager-557d7.appspot.com/o/1707412052287hand-holding-writing-checklist-application-form-document-clipboard-white-background-3d-illustration.jpg?alt=media&token=98b360b4-954c-47e3-8283-8228a54a327c",
-            ],
-            team: [
-                {
-                    _id: "65c317360fd860f958baa08e",
-                    name: "Alex Johnson",
-                    title: "UX Designer",
-                    role: "Designer",
-                    email: "alex.johnson@example.com",
-                },
-                {
-                    _id: "65c3176a0fd860f958baa099",
-                    name: "Emily Wilson",
-                    title: "Data Analyst",
-                    role: "Analyst",
-                    email: "emily.wilson@example.com",
-                },
-            ],
-            isTrashed: false,
-            activities: [
-                {
-                    type: "completed",
-                    activity: "Project completed!!",
-                    date: "2024-02-08T18:13:14.717Z",
-                    by: "65c202d4aa62f32ffd1303cc",
-                    _id: "65c51b998064df97d208b3f9",
-                },
             ],
             subTasks: [
                 {

@@ -27,7 +27,7 @@ const TaskCard = ({ task }) => {
 
     return (
         <>
-            <div className='w-full h-fit bg-white shadow-md p-4 rounded'>
+            <div className='w-full h-fit bg-purple-50 shadow-md p-4 rounded'>
                 <div className='w-full flex justify-between'>
                     <div
                         className={clsx(
@@ -38,16 +38,12 @@ const TaskCard = ({ task }) => {
                         <span className='text-lg'>{ICONS[task?.priority]}</span>
                         <span className='uppercase'>{task?.priority} Priority</span>
                     </div>
-
                     <TaskDialog task={task} />
                 </div>
 
                 <>
                     <div className='flex items-center gap-2'>
-                        <div
-                            className={clsx("w-4 h-4 rounded-full", TASK_TYPE[task.stage])}
-                        />
-                        <h4 className='line-clamp-1 text-black'>{task?.title}</h4>
+                        <h4 className='line-clamp-1 text-xl font-bold text-purple-700'>{task?.title}</h4>
                     </div>
                     <span className='text-sm text-gray-600'>
                         {formatDate(new Date(task?.date))}
@@ -56,11 +52,11 @@ const TaskCard = ({ task }) => {
 
                 <div className='w-full border-t border-gray-200 my-2' />
                 <div className='flex items-center justify-between mb-2'>
+                    <div className="flex items-center gap-2">
+                        <div className={clsx("w-4 h-4 rounded-full", TASK_TYPE[task.stage])} />
+                        <h4 className="uppercase text-sm text-black">{task.stage}</h4>
+                    </div>
                     <div className='flex items-center gap-3'>
-                        <div className='flex gap-1 items-center text-sm text-gray-600'>
-                            <BiMessageAltDetail />
-                            <span>{task?.activities?.length}</span>
-                        </div>
                         <div className='flex gap-1 items-center text-sm text-gray-600 '>
                             <MdAttachFile />
                             <span>{task?.assets?.length}</span>
@@ -70,14 +66,6 @@ const TaskCard = ({ task }) => {
                             <span>0/{task?.subTasks?.length}</span>
                         </div>
                     </div>
-
-                    <div flex flex-col items-center gap-2>
-                        <div
-                            className={clsx("w-4 h-4 rounded-full", TASK_TYPE[task.stage])}
-                        />
-                        <h4 className='uppercase text-sm text-black'>{task.stage}</h4>
-                    </div>
-
                 </div>
 
                 {/* sub tasks */}
@@ -89,12 +77,11 @@ const TaskCard = ({ task }) => {
                         <h5 className='text-base line-clamp-1 text-black'>
                             {task?.subTasks[0].title}
                         </h5>
-
                         <div className='p-4 space-x-8'>
                             <span className='text-sm text-gray-600'>
                                 {formatDate(new Date(task?.subTasks[0]?.date))}
                             </span>
-                            <span className='bg-blue-600/10 px-3 py-1 rounded0full text-blue-700 font-medium'>
+                            <span className='bg-blue-600/10 px-3 py-1 rounded-full text-blue-700 font-medium'>
                                 {task?.subTasks[0].tag}
                             </span>
                         </div>
@@ -117,6 +104,7 @@ const TaskCard = ({ task }) => {
                     </button>
                 </div>
             </div>
+
 
             <AddSubTask open={open} setOpen={setOpen} id={task._id} />
         </>
