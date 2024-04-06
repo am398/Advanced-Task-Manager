@@ -23,9 +23,21 @@ const ICONS = {
 };
 
 const Table = ({ tasks }) => {
-    const [selected, setSelected] = useState(null);
     const [openDialog, setOpenDialog] = useState(false);
     const [openEdit, setOpenEdit] = useState(false);
+    const [selectedTaskId, setSelectedTaskId] = useState(null);
+    const [selectedTask, setSelectedTask] = useState(null);
+
+
+    const handleOpenDialog = (taskId) => {
+        setSelectedTaskId(taskId);
+        setOpenDialog(true);
+    };
+    const handleOpenEdit = (task) => {
+        setSelectedTask(task);
+        setOpenEdit(true);
+    };
+
 
     const navigate = useNavigate();
 
@@ -40,7 +52,7 @@ const Table = ({ tasks }) => {
         </thead>
     );
 
-    const TableRow = ({ task }) => (
+    const TableRow = ({ task, onEditClick, onDeleteClick }) => (
         <tr className='border-b border-gray-200 text-gray-600 hover:bg-gray-300/10'>
             <td className='py-2'>
                 <div className='flex items-center gap-2'>
@@ -88,16 +100,14 @@ const Table = ({ tasks }) => {
                     className='text-blue-600 hover:text-blue-500 sm:px-0 text-sm md:text-base'
                     label='Edit'
                     type='button'
-                    onClick={() =>{
-                         setOpenEdit(true)}}
+                    onClick={() => onEditClick(task)}
                 />
 
                 <Button
                     className='text-red-700 hover:text-red-500 sm:px-0 text-sm md:text-base'
                     label='Delete'
                     type='button'
-                    onClick={() =>{ 
-                        setOpenDialog(true)}}
+                    onClick={() => onDeleteClick(task._id)}
                 />
             </td>
         </tr>
@@ -111,23 +121,15 @@ const Table = ({ tasks }) => {
                         <tbody>
                             {tasks.map((task, index) => (
                                 <>
-                                    <TableRow key={index} task={task} />
-                                    <AddTask
-                                        open={openEdit}
-                                        setOpen={setOpenEdit}
-                                        currenttask={task}
-                                    />
-                                    <ConfirmationDialogs
-                                        open={openDialog}
-                                        setOpen={setOpenDialog}
-                                        taskId={task._id}
-                                    />
+                                    <TableRow key={index} task={task} onEditClick={() => handleOpenEdit(task)} onDeleteClick={() => handleOpenDialog(task._id)} />
                                 </>
                             ))}
                         </tbody>
                     </table>
                 </div>
             </div>
+            {openEdit && <AddTask open={openEdit} setOpen={setOpenEdit} currenttask={selectedTask} />}
+            {openDialog && <ConfirmationDialogs open={openDialog} setOpen={setOpenDialog} taskId={selectedTaskId} />}
         </>
 
     );
