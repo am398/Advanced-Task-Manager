@@ -10,9 +10,11 @@ import { toast } from "sonner";
 import { BGS, PRIOTITYSTYELS, TASK_TYPE, formatDate } from "../../utils";
 import clsx from "clsx";
 import { FaList } from "react-icons/fa";
-import UserInfo from "../UserInfo";
 import Button from "../Button";
-import ConfirmatioDialog from "../ConfirmationDialogs";
+import ConfirmationDialogs from "../ConfirmationDialogs";
+import { useNavigate } from 'react-router-dom';
+import { set } from "mongoose";
+import AddTask from './AddTask';
 
 const ICONS = {
     high: <MdKeyboardDoubleArrowUp />,
@@ -21,15 +23,11 @@ const ICONS = {
 };
 
 const Table = ({ tasks }) => {
-    const [openDialog, setOpenDialog] = useState(false);
     const [selected, setSelected] = useState(null);
+    const [openDialog, setOpenDialog] = useState(false);
+    const [openEdit, setOpenEdit] = useState(false);
 
-    const deleteClicks = (id) => {
-        setSelected(id);
-        setOpenDialog(true);
-    };
-
-    const deleteHandler = () => { };
+    const navigate = useNavigate();
 
     const TableHeader = () => (
         <thead className='w-full border-b border-gray-300'>
@@ -49,9 +47,9 @@ const Table = ({ tasks }) => {
                     <div
                         className={clsx("w-4 h-4 rounded-full", TASK_TYPE[task.stage])}
                     />
-                    <p className='w-full line-clamp-2 text-base text-black'>
-                        {task?.title}
-                    </p>
+                    <button onClick={() => navigate(`/task/${task._id}`)} className='text-base text-black bg-transparent border-none cursor-pointer'>
+                        {task.title}
+                    </button>
                 </div>
             </td>
 
@@ -90,13 +88,16 @@ const Table = ({ tasks }) => {
                     className='text-blue-600 hover:text-blue-500 sm:px-0 text-sm md:text-base'
                     label='Edit'
                     type='button'
+                    onClick={() =>{
+                         setOpenEdit(true)}}
                 />
 
                 <Button
                     className='text-red-700 hover:text-red-500 sm:px-0 text-sm md:text-base'
                     label='Delete'
                     type='button'
-                    onClick={() => deleteClicks(task._id)}
+                    onClick={() =>{ 
+                        setOpenDialog(true)}}
                 />
             </td>
         </tr>
@@ -109,20 +110,26 @@ const Table = ({ tasks }) => {
                         <TableHeader />
                         <tbody>
                             {tasks.map((task, index) => (
-                                <TableRow key={index} task={task} />
+                                <>
+                                    <TableRow key={index} task={task} />
+                                    <AddTask
+                                        open={openEdit}
+                                        setOpen={setOpenEdit}
+                                        currenttask={task}
+                                    />
+                                    <ConfirmationDialogs
+                                        open={openDialog}
+                                        setOpen={setOpenDialog}
+                                        taskId={task._id}
+                                    />
+                                </>
                             ))}
                         </tbody>
                     </table>
                 </div>
             </div>
-
-            {/* TODO */}
-            <ConfirmatioDialog
-                open={openDialog}
-                setOpen={setOpenDialog}
-                onClick={deleteHandler}
-            />
         </>
+
     );
 };
 

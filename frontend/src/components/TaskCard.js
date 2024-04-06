@@ -12,6 +12,7 @@ import { BiMessageAltDetail } from "react-icons/bi";
 import { FaList } from "react-icons/fa";
 import { IoMdAdd } from "react-icons/io";
 import AddSubTask from "./task/AddSubTask";
+import { useNavigate } from 'react-router-dom';
 
 const ICONS = {
     high: <MdKeyboardDoubleArrowUp />,
@@ -20,11 +21,12 @@ const ICONS = {
 };
 
 const TaskCard = ({ task }) => {
+    const navigate = useNavigate();
     const [open, setOpen] = useState(false);
 
     return (
         <>
-            <div className='w-full h-fit bg-purple-50 shadow-md p-4 rounded'>
+            <div className='w-full h-fit bg-yellow-50 shadow-md p-4 rounded'>
                 <div className='w-full flex justify-between'>
                     <div
                         className={clsx(
@@ -39,7 +41,7 @@ const TaskCard = ({ task }) => {
                 </div>
 
                 <>
-                    <div className='flex items-center gap-2'>
+                    <div onClick={() => navigate(`/task/${task._id}`)} className='cursor-pointer flex items-center gap-2'>
                         <h4 className='line-clamp-1 text-xl font-bold text-purple-700'>{task?.title}</h4>
                     </div>
                     <span className='text-sm text-gray-600'>

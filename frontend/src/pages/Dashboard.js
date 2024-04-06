@@ -14,8 +14,10 @@ import clsx from "clsx";
 import { BGS, PRIOTITYSTYELS, TASK_TYPE, getInitials } from "../utils";
 
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const TaskTable = ({ tasks }) => {
+    const navigate = useNavigate();
     const ICONS = {
         high: <MdKeyboardDoubleArrowUp />,
         medium: <MdKeyboardArrowUp />,
@@ -40,7 +42,9 @@ const TaskTable = ({ tasks }) => {
                         className={clsx("w-4 h-4 rounded-full", TASK_TYPE[task.stage])}
                     />
 
-                    <p className='text-base text-black'>{task.title}</p>
+                    <button onClick={() => navigate(`/task/${task._id}`)} className='text-base text-black bg-transparent border-none cursor-pointer'>
+                        {task.title}
+                    </button>
                 </div>
             </td>
 

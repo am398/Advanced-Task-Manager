@@ -1,8 +1,6 @@
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import Textbox from "../components/Textbox";
-import Button from "../components/Button";
 import { useSelector } from "react-redux";
 import { SignInButton, SignUpButton } from "@clerk/clerk-react";
 
@@ -15,11 +13,6 @@ const Login = () => {
     } = useForm();
 
     const navigate = useNavigate();
-
-    const submitHandler = async (data) => {
-        console.log("submit");
-    };
-
     useEffect(() => {
         user && navigate("/dashboard");
     }, [user]);
@@ -35,21 +28,20 @@ const Login = () => {
                         </span>
 
                         <p className='flex flex-col gap-0 md:gap-4 text-4xl md:text-6xl 2xl:text-7xl font-black text-center text-blue-700'>
-                            <span>My</span>
+                            <span className="text-pink-500"> My </span>
                             <span className="text-pink-500">Task Manager</span>
                         </p>
 
                         <div className='cell'>
-                            <div className='circle rotate-in-up-left bg-gradient-to-br from-purple-400 to-pink-500'></div>
+                            <div className=' bg-gradient-to-br from-purple-400 to-pink-500 animate-pulse shadow-lg'></div>
                         </div>
                     </div>
                 </div>
 
-
                 {/* right side */}
                 <div className='w-full md:w-1/3 p-4 md:p-1 flex flex-col justify-center items-center'>
                     <form
-                        onSubmit={handleSubmit(submitHandler)}
+                        onSubmit={handleSubmit()}
                         className='form-container w-full md:w-[400px] flex flex-col gap-y-8 bg-white px-10 pt-14 pb-14'
                     >
                         <div className=''>

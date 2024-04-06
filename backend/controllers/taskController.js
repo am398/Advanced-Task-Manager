@@ -126,7 +126,7 @@ export const updateTask = async (req, res) => {
 
         res
             .status(200)
-            .json({ status: true, message: "Task Updated successfully." });
+            .json({ status: true,task,message: "Task Updated successfully." });
     } catch (error) {
         console.log(error);
         return res.status(400).json({ status: false, message: error.message });

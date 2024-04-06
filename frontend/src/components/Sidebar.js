@@ -6,6 +6,7 @@ import {
     MdSettings,
     MdTaskAlt,
 } from "react-icons/md";
+import {SiTask} from 'react-icons/si';
 import { FaTasks } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
@@ -60,9 +61,9 @@ const Sidebar = () => {
                 to={el.link}
                 onClick={closeSidebar}
                 className={clsx(
-                    "w-full lg:w-3/4 flex gap-2 px-3 py-2 rounded-full items-center text-gray-800 text-base hover:bg-[#2564ed2d]",
+                    "w-full lg:w-3/4 flex gap-2 px-3 py-2 rounded-full items-center text-gray-800 text-base hover:bg-[#ed25d22d]",
                     path === el.link.split("/")[0] ?
-                        "bg-orange-700 text-neutral-100"
+                        "bg-indigo-500 text-neutral-100"
                         : ""
                 )}
             >
@@ -75,7 +76,7 @@ const Sidebar = () => {
         <div className='w-full  h-full flex flex-col gap-6 p-5'>
             <h1 className='flex gap-1 items-center'>
                 <p className='bg-green-600 p-2 rounded-full'>
-                    <MdOutlineAddTask className='text-white text-2xl font-black' />
+                    <SiTask className='text-white text-2xl font-black' />
                 </p>
                 <span className='text-2xl font-bold text-black'>My Task Manager</span>
             </h1>

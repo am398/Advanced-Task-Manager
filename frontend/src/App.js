@@ -29,17 +29,15 @@ const router = createBrowserRouter([
   },
   {
     path: "log-in",
-    element: <Login />,
+    element: (
+      <Login />
+    )
   },
 ]);
 
 export default function App() {
-  const { isSignedIn, user, isLoaded } = useUser();
+  const { isSignedIn, user } = useUser();
   const dispatch = useDispatch();
-
-  if (!isLoaded) {
-    // Handle loading state however you like
-  }
 
   if (isSignedIn) {
     const { id, username, fullName, primaryEmailAddress, primaryPhoneNumber, hasImage, imageUrl } = user;

@@ -45,7 +45,6 @@ const TaskDetails = () => {
     const task = tasks.find((task) => task._id === id);
 
     if (!task) {
-        console.log(tasks)
         return (
             <div className='w-full flex items-center justify-center h-screen'>
                 <Loading />

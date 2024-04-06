@@ -23,14 +23,5 @@ const authSlice = createSlice({
 
 export const { setCredentials, logout, setOpenSidebar } = authSlice.actions;
 
-export const setUserInfo = (userInfo) => (dispatch) => {
-    dispatch(setCredentials(userInfo));
-    localStorage.setItem("userInfo", JSON.stringify(userInfo));
-};
-
-export const clearUserInfo = () => (dispatch) => {
-    dispatch(logout());
-    localStorage.removeItem("userInfo");
-};
 
 export default authSlice.reducer;

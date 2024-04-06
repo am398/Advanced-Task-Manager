@@ -7,18 +7,14 @@ import { useForm } from "react-hook-form";
 import SelectList from "../SelectList";
 import { BiImages } from "react-icons/bi";
 import Button from "../Button";
-import { addTask } from "../../redux/slices/taskSlice";
+import { addTask, updateTask } from "../../redux/slices/taskSlice";
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 
 const LISTS = ["TODO", "IN PROGRESS", "COMPLETED"];
 const PRIORIRY = ["HIGH", "MEDIUM", "NORMAL", "LOW"];
 
-const uploadedFileURLs = [];
-
-const AddTask = ({ open, setOpen,currenttask }) => {
-    const task = "";
-
+const AddTask = ({ open, setOpen, currenttask }) => {
     const {
         register,
         handleSubmit,
@@ -30,8 +26,18 @@ const AddTask = ({ open, setOpen,currenttask }) => {
     const [priority, setPriority] = useState(
         currenttask?.priority?.toUpperCase() || PRIORIRY[2]
     );
+
+    if (currenttask) {
+        setValue('title', currenttask.title);
+        if(currenttask.assets && currenttask.assets.length > 0)
+        setValue('assetLink', currenttask.assets[0]);
+        if(currenttask.date)
+        setValue('date', currenttask.date.split('T')[0]);
+    }
+
     setValue('priority', priority);
     setValue('stage', stage);
+
     const [loading, setloading] = useState(false);
 
     let user = useSelector(state => state.auth.user);
@@ -41,9 +47,17 @@ const AddTask = ({ open, setOpen,currenttask }) => {
     const dispatch = useDispatch();
 
     const submitHandler = async (formData) => {
+        const asset = formData.assetLink;
         formData.user_id = user;
+        delete formData.assetLink;
+        formData.assets = [];
+        formData.assets.push(asset);
         setloading(true);
-        const success = addTask(formData,dispatch);
+        let success = false;
+        if(currenttask)
+        success = updateTask(currenttask._id,formData, dispatch);
+        else
+        success = addTask(formData, dispatch);
         if (success) {
             setloading(false);
             setOpen(false);
@@ -69,11 +83,9 @@ const AddTask = ({ open, setOpen,currenttask }) => {
                             name='title'
                             label='Task Title'
                             className='w-full rounded'
-                            defaultValue={currenttask ? currenttask.title : ""}
                             register={register("title", { required: "Title is required" })}
                             error={errors.title ? errors.title.message : ""}
                         />
-
                         <div className='flex gap-4'>
                             <SelectList
                                 label='Task Stage'

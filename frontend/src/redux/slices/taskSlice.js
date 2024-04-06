@@ -96,8 +96,8 @@ export async function deleteTask (taskId,dispatch){
 
 export async function updateTask(taskId, updatedTaskData, dispatch) {
 	try {
-		const response = await axios.put(`http://localhost:4000/task/${taskId}`, updatedTaskData);
-		dispatch(taskUpdated(response.data));
+		const response = await axios.patch(`http://localhost:5000/api/task/update/${taskId}`, updatedTaskData);
+		dispatch(taskUpdated(response.data.task));
 		toast.success('Task updated successfully');
 	} catch (error) {
 		console.error('Error updating task:', error);
