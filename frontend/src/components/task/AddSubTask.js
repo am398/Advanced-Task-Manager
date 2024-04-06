@@ -3,6 +3,11 @@ import ModalWrapper from "../ModalWrapper";
 import { Dialog } from "@headlessui/react";
 import Textbox from "../Textbox";
 import Button from "../Button";
+import { useState } from "react";
+import { useSelector,useDispatch } from 'react-redux';
+import { addSubTask} from "../../redux/slices/taskSlice";
+import { useParams } from 'react-router-dom';
+
 
 const AddSubTask = ({ open, setOpen, id }) => {
     const {
@@ -11,10 +16,13 @@ const AddSubTask = ({ open, setOpen, id }) => {
         formState: { errors },
     } = useForm();
 
-    const handleOnSubmit = async (data) => {
-        formData.user_id = user;
+    const [loading, setloading] = useState(false);
+    const dispatch = useDispatch();  
+
+    const handleOnSubmit = async (formData) => {
+        console.log(id);
         setloading(true);
-        const success = addTask(formData, dispatch);
+        const success = addSubTask(id,formData,dispatch);
         if (success) {
             setloading(false);
             setOpen(false);

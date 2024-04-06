@@ -80,8 +80,10 @@ export const getTask = async (req, res) => {
 export const createSubTask = async (req, res) => {
     try {
         const { title, tag, date } = req.body;
-
         const { id } = req.params;
+
+        console.log(req.body)
+        console.log(id);
 
         const newSubTask = {
             title,
@@ -92,11 +94,10 @@ export const createSubTask = async (req, res) => {
         const task = await Task.findById(id);
 
         task.subTasks.push(newSubTask);
-
         await task.save();
         res
             .status(200)
-            .json({ status: true, message: "SubTask added successfully." });
+            .json({ status: true,task, message: "SubTask added successfully." });
     } catch (error) {
         console.log(error);
         return res.status(400).json({ status: false, message: error.message });
@@ -106,7 +107,7 @@ export const createSubTask = async (req, res) => {
 export const updateTask = async (req, res) => {
     try {
         const { id } = req.params;
-        const { title, date, team, stage, priority, assets } = req.body;
+        const { title, date, stage, priority, assets } = req.body;
 
         const task = await Task.findById(id);
 

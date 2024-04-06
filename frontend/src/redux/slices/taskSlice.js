@@ -43,10 +43,11 @@ export const taskSlice = createSlice({
 			const index = state.tasks.findIndex(task => task.id === updatedTask.id);
 			if (index !== -1) {
 				state.tasks[index] = updatedTask;
+				// Update todoTasks, completedTasks, and inProgressTasks based on the updated state
+				state.todoTasks = state.tasks.filter(task => task.stage === 'todo');
+				state.completedTasks = state.tasks.filter(task => task.stage === 'completed');
+				state.inProgressTasks = state.tasks.filter(task => task.stage === 'in progress');
 			}
-			state.todoTasks = state.tasks.filter(task => task.stage === 'todo');
-			state.completedTasks = state.tasks.filter(task => task.stage === 'completed');
-			state.inProgressTasks = state.tasks.filter(task => task.stage === 'in progress');
 		},
 	},
 });
@@ -69,17 +70,17 @@ export const getAllTasks = (id) => async (dispatch) => {
 	}
 };
 
-export async function addTask(taskData,dispatch){
-    try {
-        const response = await axios.post('http://localhost:5000/api/task/create', taskData);
-        dispatch(taskAdded(response.data.task));
-        toast.success('Task added successfully');
-        return true; // Task added successfully
-    } catch (error) {
-        console.error('Error adding task:', error);
-        toast.error('Failed to add task');
-        return false; // Failed to add task
-    }
+export async function addTask(taskData, dispatch) {
+	try {
+		const response = await axios.post('http://localhost:5000/api/task/create', taskData);
+		dispatch(taskAdded(response.data.task));
+		toast.success('Task added successfully');
+		return true; // Task added successfully
+	} catch (error) {
+		console.error('Error adding task:', error);
+		toast.error('Failed to add task');
+		return false; // Failed to add task
+	}
 };
 
 export const deleteTask = (taskId) => async (dispatch) => {
@@ -93,10 +94,25 @@ export const deleteTask = (taskId) => async (dispatch) => {
 	}
 };
 
-export const updateTask = (taskId, updatedTaskData) => async (dispatch) => {
+export async function updateTask(taskId, updatedTaskData, user, dispatch) {
 	try {
-		const response = await axios.put(`http://localhost:4000/task/${taskId}`, updatedTaskData);
+		const response = await axios.put(`http://localhost:4000/task/${taskId}`, updatedTaskData, {
+			params: {
+				user_id: user
+			}
+		});
 		dispatch(taskUpdated(response.data));
+		toast.success('Task updated successfully');
+	} catch (error) {
+		console.error('Error updating task:', error);
+		toast.error('Failed to update task');
+	}
+};
+
+export async function addSubTask(taskId,updatedTaskData, dispatch) {
+	try {
+		const response = await axios.patch(`http://localhost:5000/api/task/add-subtask/${taskId}`, updatedTaskData);
+		dispatch(taskUpdated(response.data.task));
 		toast.success('Task updated successfully');
 	} catch (error) {
 		console.error('Error updating task:', error);

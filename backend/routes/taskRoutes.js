@@ -16,7 +16,7 @@ router.get("/dashboard", dashboardStatistics);
 router.get("/", getTasks);
 router.get("/:id", getTask);
 
-router.patch("/create-subtask/:id", createSubTask);
+router.patch("/add-subtask/:id", createSubTask);
 router.patch("/update/:id", updateTask);
 
 router.delete(

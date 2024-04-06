@@ -6,12 +6,10 @@ import {
     MdKeyboardArrowUp,
     MdKeyboardDoubleArrowUp,
 } from "react-icons/md";
-import { useSelector } from "react-redux";
 import { BGS, PRIOTITYSTYELS, TASK_TYPE, formatDate } from "../utils";
 import TaskDialog from "./task/TaskDialog";
 import { BiMessageAltDetail } from "react-icons/bi";
 import { FaList } from "react-icons/fa";
-import UserInfo from "./UserInfo";
 import { IoMdAdd } from "react-icons/io";
 import AddSubTask from "./task/AddSubTask";
 
@@ -22,7 +20,6 @@ const ICONS = {
 };
 
 const TaskCard = ({ task }) => {
-    const { user } = useSelector((state) => state.auth);
     const [open, setOpen] = useState(false);
 
     return (
@@ -96,7 +93,10 @@ const TaskCard = ({ task }) => {
 
                 <div className='w-full pb-2'>
                     <button
-                        onClick={() => setOpen(true)}
+                        onClick={() => {
+                            setOpen(true);
+                            // console.log(task._id);
+                        }}
                         className='w-full flex gap-4 items-center text-sm text-gray-500 font-semibold disabled:cursor-not-allowed disabled::text-gray-300'
                     >
                         <IoMdAdd className='text-lg' />
@@ -104,8 +104,6 @@ const TaskCard = ({ task }) => {
                     </button>
                 </div>
             </div>
-
-
             <AddSubTask open={open} setOpen={setOpen} id={task._id} />
         </>
     );

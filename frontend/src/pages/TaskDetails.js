@@ -14,11 +14,12 @@ import {
 import { RxActivityLog } from "react-icons/rx";
 import { useParams } from "react-router-dom";
 import { toast } from "sonner";
-import { tasks } from "../assets/data";
 import Tabs from "../components/Tabs";
 import { PRIOTITYSTYELS, TASK_TYPE, getInitials } from "../utils";
 import Loading from "../components/Loader";
 import Button from "../components/Button";
+import { useSelector } from "react-redux";
+import { MdAttachFile } from "react-icons/md";
 
 const ICONS = {
     high: <MdKeyboardDoubleArrowUp />,
@@ -39,9 +40,18 @@ const TABS = [
 
 const TaskDetails = () => {
     const { id } = useParams();
-
     const [selected, setSelected] = useState(0);
-    const task = tasks[3];
+    const tasks = useSelector((state) => state.task.tasks);
+    const task = tasks.find((task) => task._id === id);
+
+    if (!task) {
+        console.log(tasks)
+        return (
+            <div className='w-full flex items-center justify-center h-screen'>
+                <Loading />
+            </div>
+        );
+    }
 
     return (
         <div className='w-full flex flex-col gap-3 mb-4 overflow-y-hidden'>
