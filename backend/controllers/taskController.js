@@ -140,6 +140,7 @@ export const deleteTask = async (req, res) => {
         await Task.findByIdAndDelete(id);
         res.status(200).json({
             status: true,
+            id : id,
             message: `Deletion performed successfully.`,
         });
     } catch (error) {

@@ -8,6 +8,7 @@ import { Menu, Transition } from "@headlessui/react";
 import AddTask from "./AddTask";
 import AddSubTask from "./AddSubTask";
 import ConfirmationDialog from "../ConfirmationDialogs";
+import { deleteTask } from "../../redux/slices/taskSlice";
 
 const TaskDialog = ({ task }) => {
     const [open, setOpen] = useState(false);
@@ -16,7 +17,6 @@ const TaskDialog = ({ task }) => {
 
     const navigate = useNavigate();
     const handleDelete = () => { setOpenDialog(true) };
-    const deleteHandler = () => { };
 
     const items = [
         {
@@ -96,16 +96,16 @@ const TaskDialog = ({ task }) => {
             <AddTask
                 open={openEdit}
                 setOpen={setOpenEdit}
-                task={task}
+                currenttask={task}
                 key={new Date().getTime()}
             />
 
-            <AddSubTask open={open} setOpen={setOpen} />
+            <AddSubTask open={open} setOpen={setOpen} id={task._id} />
 
             <ConfirmationDialog
                 open={openDialog}
                 setOpen={setOpenDialog}
-                onClick={deleteHandler}
+                taskId={task._id}
             />
         </>
     );

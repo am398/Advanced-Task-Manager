@@ -42,10 +42,11 @@ export default function App() {
   }
 
   if (isSignedIn) {
-    dispatch(setCredentials(user));
-    dispatch(getAllTasks(user.id));
+    const { id, username, fullName, primaryEmailAddress, primaryPhoneNumber, hasImage, imageUrl } = user;
+    const email = primaryEmailAddress.emailAddress;
+    dispatch(setCredentials({ id, username, fullName, email, primaryPhoneNumber, hasImage, imageUrl }));
+    dispatch(getAllTasks(id));
   }
-
   return (
     <div className="App" text-white >
       <RouterProvider router={router} />

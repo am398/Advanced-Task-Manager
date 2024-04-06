@@ -16,7 +16,7 @@ const PRIORIRY = ["HIGH", "MEDIUM", "NORMAL", "LOW"];
 
 const uploadedFileURLs = [];
 
-const AddTask = ({ open, setOpen }) => {
+const AddTask = ({ open, setOpen,currenttask }) => {
     const task = "";
 
     const {
@@ -26,9 +26,9 @@ const AddTask = ({ open, setOpen }) => {
         setValue
     } = useForm();
 
-    const [stage, setStage] = useState(task?.stage?.toUpperCase() || LISTS[0]);
+    const [stage, setStage] = useState(currenttask?.stage?.toUpperCase() || LISTS[0]);
     const [priority, setPriority] = useState(
-        task?.priority?.toUpperCase() || PRIORIRY[2]
+        currenttask?.priority?.toUpperCase() || PRIORIRY[2]
     );
     setValue('priority', priority);
     setValue('stage', stage);
@@ -59,7 +59,7 @@ const AddTask = ({ open, setOpen }) => {
                         as='h2'
                         className='text-base font-bold leading-6 text-gray-900 mb-4'
                     >
-                        {task ? "UPDATE TASK" : "ADD TASK"}
+                        {currenttask ? "UPDATE TASK" : "ADD TASK"}
                     </Dialog.Title>
 
                     <div className='mt-2 flex flex-col gap-6'>
@@ -69,6 +69,7 @@ const AddTask = ({ open, setOpen }) => {
                             name='title'
                             label='Task Title'
                             className='w-full rounded'
+                            defaultValue={currenttask ? currenttask.title : ""}
                             register={register("title", { required: "Title is required" })}
                             error={errors.title ? errors.title.message : ""}
                         />

@@ -20,7 +20,6 @@ const AddSubTask = ({ open, setOpen, id }) => {
     const dispatch = useDispatch();  
 
     const handleOnSubmit = async (formData) => {
-        console.log(id);
         setloading(true);
         const success = addSubTask(id,formData,dispatch);
         if (success) {

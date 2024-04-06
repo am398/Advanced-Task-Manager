@@ -33,17 +33,17 @@ export const taskSlice = createSlice({
 			}
 		},
 		taskDeleted: (state, action) => {
-			state.tasks = state.tasks.filter(task => task.id !== action.payload);
-			state.todoTasks = state.todoTasks.filter(task => task.id !== action.payload);
-			state.completedTasks = state.completedTasks.filter(task => task.id !== action.payload);
-			state.inProgressTasks = state.inProgressTasks.filter(task => task.id !== action.payload);
+			const deletedTaskId = action.payload;
+			state.tasks = state.tasks.filter(task => task._id !== deletedTaskId);
+			state.todoTasks = state.todoTasks.filter(task => task._id !== deletedTaskId);
+			state.completedTasks = state.completedTasks.filter(task => task._id !== deletedTaskId);
+			state.inProgressTasks = state.inProgressTasks.filter(task => task._id !== deletedTaskId);
 		},
 		taskUpdated: (state, action) => {
 			const updatedTask = action.payload;
-			const index = state.tasks.findIndex(task => task.id === updatedTask.id);
+			const index = state.tasks.findIndex(task => task._id === updatedTask._id);
 			if (index !== -1) {
 				state.tasks[index] = updatedTask;
-				// Update todoTasks, completedTasks, and inProgressTasks based on the updated state
 				state.todoTasks = state.tasks.filter(task => task.stage === 'todo');
 				state.completedTasks = state.tasks.filter(task => task.stage === 'completed');
 				state.inProgressTasks = state.tasks.filter(task => task.stage === 'in progress');
@@ -83,9 +83,9 @@ export async function addTask(taskData, dispatch) {
 	}
 };
 
-export const deleteTask = (taskId) => async (dispatch) => {
+export async function deleteTask (taskId,dispatch){
 	try {
-		await axios.delete(`http://localhost:4000/task/${taskId}`);
+		await axios.delete(`http://localhost:5000/api/task/delete/${taskId}`);
 		dispatch(taskDeleted(taskId));
 		toast.success('Task deleted successfully');
 	} catch (error) {
@@ -94,13 +94,9 @@ export const deleteTask = (taskId) => async (dispatch) => {
 	}
 };
 
-export async function updateTask(taskId, updatedTaskData, user, dispatch) {
+export async function updateTask(taskId, updatedTaskData, dispatch) {
 	try {
-		const response = await axios.put(`http://localhost:4000/task/${taskId}`, updatedTaskData, {
-			params: {
-				user_id: user
-			}
-		});
+		const response = await axios.put(`http://localhost:4000/task/${taskId}`, updatedTaskData);
 		dispatch(taskUpdated(response.data));
 		toast.success('Task updated successfully');
 	} catch (error) {
