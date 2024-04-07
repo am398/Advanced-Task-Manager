@@ -13,7 +13,6 @@ import { FaList } from "react-icons/fa";
 import Button from "../Button";
 import ConfirmationDialogs from "../ConfirmationDialogs";
 import { useNavigate } from 'react-router-dom';
-import { set } from "mongoose";
 import AddTask from './AddTask';
 
 const ICONS = {
