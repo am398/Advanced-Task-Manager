@@ -14,7 +14,7 @@ import { useDispatch } from 'react-redux';
 const LISTS = ["TODO", "IN PROGRESS", "COMPLETED"];
 const PRIORIRY = ["HIGH", "MEDIUM", "NORMAL", "LOW"];
 
-const AddTask = ({ open, setOpen, currenttask }) => {
+const AddTask = ({ open, setOpen, currenttask, value }) => {
     const {
         register,
         handleSubmit,
@@ -29,14 +29,21 @@ const AddTask = ({ open, setOpen, currenttask }) => {
 
     if (currenttask) {
         setValue('title', currenttask.title);
-        if(currenttask.assets && currenttask.assets.length > 0)
-        setValue('assetLink', currenttask.assets[0]);
-        if(currenttask.date)
-        setValue('date', currenttask.date.split('T')[0]);
+        if (currenttask.assets && currenttask.assets.length > 0)
+            setValue('assetLink', currenttask.assets[0]);
+        if (currenttask.date)
+            setValue('date', currenttask.date.split('T')[0]);
     }
 
     setValue('priority', priority);
-    setValue('stage', stage);
+    if (value)
+    {
+        console.log(value.toUpperCase());
+        setValue('stage', value.toUpperCase());
+
+    }
+    else
+        setValue('stage', stage);
 
     const [loading, setloading] = useState(false);
 
@@ -54,10 +61,10 @@ const AddTask = ({ open, setOpen, currenttask }) => {
         formData.assets.push(asset);
         setloading(true);
         let success = false;
-        if(currenttask)
-        success = updateTask(currenttask._id,formData, dispatch);
+        if (currenttask)
+            success = updateTask(currenttask._id, formData, dispatch);
         else
-        success = addTask(formData, dispatch);
+            success = addTask(formData, dispatch);
         if (success) {
             setloading(false);
             setOpen(false);
