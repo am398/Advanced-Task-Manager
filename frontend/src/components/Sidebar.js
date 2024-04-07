@@ -1,18 +1,15 @@
+import clsx from "clsx";
 import React from "react";
+import { FaTasks } from "react-icons/fa";
 import {
     MdDashboard,
-    MdOutlineAddTask,
     MdOutlinePendingActions,
-    MdSettings,
-    MdTaskAlt,
+    MdTaskAlt
 } from "react-icons/md";
-import {SiTask} from 'react-icons/si';
-import { FaTasks } from "react-icons/fa";
+import { SiTask } from 'react-icons/si';
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import { setOpenSidebar } from "../redux/slices/authSlice";
-import clsx from "clsx";
-import { TASK_TYPE } from '../utils/index';
 
 const linkData = [
     {

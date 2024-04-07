@@ -1,17 +1,16 @@
+import clsx from "clsx";
+import moment from "moment";
 import React from "react";
+import { FaNewspaper } from "react-icons/fa";
+import { FaArrowsToDot } from "react-icons/fa6";
+import { LuClipboardEdit } from "react-icons/lu";
 import {
     MdAdminPanelSettings,
     MdKeyboardArrowDown,
     MdKeyboardArrowUp,
     MdKeyboardDoubleArrowUp,
 } from "react-icons/md";
-import { LuClipboardEdit } from "react-icons/lu";
-import { FaNewspaper, FaUsers } from "react-icons/fa";
-import { FaArrowsToDot } from "react-icons/fa6";
-import moment from "moment";
-import { summary } from "../assets/data";
-import clsx from "clsx";
-import { BGS, PRIOTITYSTYELS, TASK_TYPE, getInitials } from "../utils";
+import { PRIOTITYSTYELS, TASK_TYPE } from "../utils";
 
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';

@@ -1,16 +1,15 @@
 
-import React from "react";
-import { createBrowserRouter, Navigate, RouterProvider } from "react-router-dom";
-import Dashboard from "./pages/Dashboard";
-import { Layout } from "./components/Layout";
-import Login from "./pages/Login";
-import Tasks from "./pages/Tasks";
-import { Toaster } from "sonner";
-import TaskDetails from "./pages/TaskDetails";
 import { useUser } from "@clerk/clerk-react";
-import { setCredentials } from "./redux/slices/authSlice";
+import React from "react";
 import { useDispatch } from "react-redux";
-import { useEffect } from "react";
+import { createBrowserRouter, Navigate, RouterProvider } from "react-router-dom";
+import { Toaster } from "sonner";
+import { Layout } from "./components/Layout";
+import Dashboard from "./pages/Dashboard";
+import Login from "./pages/Login";
+import TaskDetails from "./pages/TaskDetails";
+import Tasks from "./pages/Tasks";
+import { setCredentials } from "./redux/slices/authSlice";
 import { getAllTasks } from "./redux/slices/taskSlice";
 
 const router = createBrowserRouter([

@@ -1,14 +1,13 @@
+import { Menu, Transition } from "@headlessui/react";
 import React, { Fragment, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { AiTwotoneFolderOpen } from "react-icons/ai";
 import { BsThreeDots } from "react-icons/bs";
 import { MdAdd, MdOutlineEdit } from "react-icons/md";
 import { RiDeleteBin6Line } from "react-icons/ri";
-import { Menu, Transition } from "@headlessui/react";
-import AddTask from "./AddTask";
-import AddSubTask from "./AddSubTask";
+import { useNavigate } from "react-router-dom";
 import ConfirmationDialog from "../ConfirmationDialogs";
-import { deleteTask } from "../../redux/slices/taskSlice";
+import AddSubTask from "./AddSubTask";
+import AddTask from "./AddTask";
 
 const TaskDialog = ({ task }) => {
     const [open, setOpen] = useState(false);

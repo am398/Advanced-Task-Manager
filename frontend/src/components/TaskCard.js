@@ -1,18 +1,17 @@
 import clsx from "clsx";
 import React, { useState } from "react";
+import { FaList } from "react-icons/fa";
+import { IoMdAdd } from "react-icons/io";
 import {
     MdAttachFile,
     MdKeyboardArrowDown,
     MdKeyboardArrowUp,
     MdKeyboardDoubleArrowUp,
 } from "react-icons/md";
-import { BGS, PRIOTITYSTYELS, TASK_TYPE, formatDate } from "../utils";
-import TaskDialog from "./task/TaskDialog";
-import { BiMessageAltDetail } from "react-icons/bi";
-import { FaList } from "react-icons/fa";
-import { IoMdAdd } from "react-icons/io";
-import AddSubTask from "./task/AddSubTask";
 import { useNavigate } from 'react-router-dom';
+import { PRIOTITYSTYELS, TASK_TYPE, formatDate } from "../utils";
+import AddSubTask from "./task/AddSubTask";
+import TaskDialog from "./task/TaskDialog";
 
 const ICONS = {
     high: <MdKeyboardDoubleArrowUp />,

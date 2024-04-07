@@ -1,10 +1,9 @@
-import React from "react";
-import { MdOutlineSearch } from "react-icons/md";
-import { useDispatch, useSelector } from "react-redux";
-import { setOpenSidebar } from "../redux/slices/authSlice";
 import {
     UserButton,
 } from "@clerk/clerk-react";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setOpenSidebar } from "../redux/slices/authSlice";
 
 const Navbar = () => {
     const { user } = useSelector((state) => state.auth);

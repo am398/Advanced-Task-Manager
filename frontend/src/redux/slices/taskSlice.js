@@ -1,8 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
 
 
 const initialState = {
@@ -58,7 +56,7 @@ export default taskSlice.reducer;
 
 export const getAllTasks = (id) => async (dispatch) => {
 	try {
-		const response = await axios.get('http://localhost:5000/api/task', {
+		const response = await axios.get('https://task-manager-z5la.onrender.com/api/task', {
 			params: {
 				user_id: id
 			}
@@ -72,7 +70,7 @@ export const getAllTasks = (id) => async (dispatch) => {
 
 export async function addTask(taskData, dispatch) {
 	try {
-		const response = await axios.post('http://localhost:5000/api/task/create', taskData);
+		const response = await axios.post('https://task-manager-z5la.onrender.com/api/task/create', taskData);
 		dispatch(taskAdded(response.data.task));
 		toast.success('Task added successfully');
 		return true; // Task added successfully
@@ -85,7 +83,7 @@ export async function addTask(taskData, dispatch) {
 
 export async function deleteTask (taskId,dispatch){
 	try {
-		await axios.delete(`http://localhost:5000/api/task/delete/${taskId}`);
+		await axios.delete(`https://task-manager-z5la.onrender.com/api/task/delete/${taskId}`);
 		dispatch(taskDeleted(taskId));
 		toast.success('Task deleted successfully');
 	} catch (error) {
@@ -96,7 +94,7 @@ export async function deleteTask (taskId,dispatch){
 
 export async function updateTask(taskId, updatedTaskData, dispatch) {
 	try {
-		const response = await axios.patch(`http://localhost:5000/api/task/update/${taskId}`, updatedTaskData);
+		const response = await axios.patch(`https://task-manager-z5la.onrender.com/api/task/update/${taskId}`, updatedTaskData);
 		dispatch(taskUpdated(response.data.task));
 		toast.success('Task updated successfully');
 	} catch (error) {
@@ -107,7 +105,7 @@ export async function updateTask(taskId, updatedTaskData, dispatch) {
 
 export async function addSubTask(taskId,updatedTaskData, dispatch) {
 	try {
-		const response = await axios.patch(`http://localhost:5000/api/task/add-subtask/${taskId}`, updatedTaskData);
+		const response = await axios.patch(`https://task-manager-z5la.onrender.com/api/task/add-subtask/${taskId}`, updatedTaskData);
 		dispatch(taskUpdated(response.data.task));
 		toast.success('Task updated successfully');
 	} catch (error) {

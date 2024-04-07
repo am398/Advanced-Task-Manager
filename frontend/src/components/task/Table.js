@@ -1,18 +1,16 @@
+import clsx from "clsx";
 import React, { useState } from "react";
-import { BiMessageAltDetail } from "react-icons/bi";
+import { FaList } from "react-icons/fa";
 import {
     MdAttachFile,
     MdKeyboardArrowDown,
     MdKeyboardArrowUp,
     MdKeyboardDoubleArrowUp,
 } from "react-icons/md";
-import { toast } from "sonner";
-import { BGS, PRIOTITYSTYELS, TASK_TYPE, formatDate } from "../../utils";
-import clsx from "clsx";
-import { FaList } from "react-icons/fa";
+import { useNavigate } from 'react-router-dom';
+import { PRIOTITYSTYELS, TASK_TYPE, formatDate } from "../../utils";
 import Button from "../Button";
 import ConfirmationDialogs from "../ConfirmationDialogs";
-import { useNavigate } from 'react-router-dom';
 import AddTask from './AddTask';
 
 const ICONS = {
