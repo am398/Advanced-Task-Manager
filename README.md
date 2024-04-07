@@ -34,3 +34,8 @@ Set up frontend: React -
 cd to frontend directory
 npm install
 npm start
+
+Test Email Id - 
+email - anuj+clerk_test@example.com
+Password - This@2024
+
