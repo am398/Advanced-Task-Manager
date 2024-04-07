@@ -1,5 +1,5 @@
 # Project Description
-## ElderEase: Empowering Care, Ensuring Comfort
+## My task Manager
 
 ElderEase is a pioneering initiative dedicated to addressing the growing concern of negligence towards elders.
 Our comprehensive website is designed to foster a supportive environment for seniors, providing essential tools to enhance their daily lives.
