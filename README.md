@@ -1,8 +1,6 @@
 # Project Description
 ## My task Manager
-
-ElderEase is a pioneering initiative dedicated to addressing the growing concern of negligence towards elders.
-Our comprehensive website is designed to foster a supportive environment for seniors, providing essential tools to enhance their daily lives.
+Manage Your Tasks Seamlessy
 
 ## Key Features
 
@@ -12,7 +10,7 @@ Our comprehensive website is designed to foster a supportive environment for sen
 
 3. Progress Tracking: Users can track the progress of their tasks, marking them as completed or partially completed, and tracking any remaining work
   
-4.Customization: Task manager applications often offer customization options, allowing users to tailor the interface, task lists, and other settings to suit their preferences and workflow.
+4. Customization: Task manager applications often offer customization options, allowing users to tailor the interface, task lists, and other settings to suit their preferences and workflow.
 
 ## Tech Stack Used
 
